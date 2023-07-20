@@ -73,12 +73,21 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu</h2>
 
-      {numPizzas > 0 && (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza key={pizza.name} {...pizza} />
-          ))}
-        </ul>
+      {numPizzas > 0 ? (
+        <React.Fragment>
+          {" "}
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza key={pizza.name} {...pizza} />
+            ))}
+          </ul>
+        </React.Fragment>
+      ) : (
+        <p>We're still working on our menu. Please come back later.</p>
       )}
     </main>
   );
@@ -86,12 +95,14 @@ function Menu() {
 
 function Pizza(props) {
   return (
-    <li className="pizza">
+    <li className={`pizza ${props.soldOut ? "sold-out" : ""}`}>
       <img src={props.photoName} alt={props.name} />
       <div className="pizza__info">
         <h3>{props.name}</h3>
         <p>{props.ingredients}</p>
-        <span className="pizza__price">{props.price}€</span>
+        <span className="pizza__price">
+          {props.soldOut ? "SOLD OUT" : props.price + "€"}
+        </span>
       </div>
     </li>
   );
@@ -105,13 +116,27 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {isOpen && (
-        <div className="order">
-          "<p>We're open until {closeHour}h, order your pizza now online.</p>
-          <button className="btn">Order now</button>
-        </div>
+      {isOpen ? (
+        <Order closeHour={closeHour} openHour={openHour} />
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00
+        </p>
       )}
     </footer>
+  );
+}
+
+function Order({ closeHour, openHour }) {
+  return (
+    <div className="order">
+      "
+      <p>
+        We're open from {openHour}:00 to {closeHour}:00, order your pizza now
+        online.
+      </p>
+      <button className="btn">Order now</button>
+    </div>
   );
 }
 
