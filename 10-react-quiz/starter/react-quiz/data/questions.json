@@ -1,8 +1,13 @@
 {
   "questions": [
     {
-      "question": "Which is the most popular JavaScript framework?",
-      "options": ["Angular", "React", "Svelte", "Vue"],
+      "question": "Quel est le modèle de ta voiture ?",
+      "options": [
+        "Porshe 911",
+        "Renault Twingo (la vieille) verte",
+        "Toyota Yaris hybride '23",
+        "Un beau vélo"
+      ],
       "correctOption": 1,
       "points": 10
     },
